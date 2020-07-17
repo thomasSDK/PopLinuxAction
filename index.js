@@ -1,13 +1,9 @@
 const core = require("@actions/core");
 const github = require("@actions/github");
 const exec = require("@actions/exec");
-const artifact = require("@actions/artifact");
 
 const architecture = core.getInput("architecture");
 
-const artifactClient = artifact.create();
-const artifactName = `linux-${architecture}`;
-// Get rid of 'NewChromantics/'
 const project = core.getInput("project")
 
 async function run() {
@@ -51,24 +47,6 @@ async function run() {
 
     await exec.exec("make", [`exec`, `-C`, `${project}.Linux/`]);
 
-    // These can be parameters passed in at a later state
-    const files = [
-      `build/Linux_${architecture}/lib${project}.so`,
-      `build/Linux_${architecture}/${project}TestApp`,
-      `build/Linux_${architecture}/${project}.h`,
-    ];
-
-    const rootDirectory = ".";
-
-    const options = {
-      continueOnError: true,
-    };
-    const uploadResponse = await artifactClient.uploadArtifact(
-      artifactName,
-      files,
-      rootDirectory,
-      options
-    );
   } catch (error) {
     core.setFailed(error.message);
   }
