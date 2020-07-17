@@ -1,0 +1,26 @@
+{
+  "name": "PopLinuxAction",
+  "version": "1.0.0",
+  "description": "The x86_64 build runs on a Github hosted runner so there needs to be a setup part to download the needed files eg. libx264.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thomasSDK/PopLinuxAction.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thomasSDK/PopLinuxAction/issues"
+  },
+  "homepage": "https://github.com/thomasSDK/PopLinuxAction#readme",
+  "dependencies": {
+    "@actions/artifact": "^0.3.2",
+    "@actions/core": "^1.2.4",
+    "@actions/exec": "^1.0.4",
+    "@actions/github": "^4.0.0"
+  }
+}
