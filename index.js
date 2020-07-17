@@ -8,7 +8,7 @@ const architecture = core.getInput("architecture");
 const artifactClient = artifact.create();
 const artifactName = `linux-${architecture}`;
 // Get rid of 'NewChromantics/'
-const module = core.getInput("architecture").slice(14)
+const project = core.getInput("project").slice(14)
 
 async function run() {
   try {
@@ -49,13 +49,13 @@ async function run() {
       ]);
     }
 
-    await exec.exec("make", [`exec`, `-C`, `${module}.Linux/`]);
+    await exec.exec("make", [`exec`, `-C`, `${project}.Linux/`]);
 
     // These can be parameters passed in at a later state
     const files = [
-      `Build/Linux_${architecture}/lib${module}.so`,
-      `Build/Linux_${architecture}/${module}TestApp`,
-      `Build/Linux_${architecture}/${module}.h`,
+      `Build/Linux_${architecture}/lib${project}.so`,
+      `Build/Linux_${architecture}/${project}TestApp`,
+      `Build/Linux_${architecture}/${project}.h`,
     ];
 
     const rootDirectory = ".";

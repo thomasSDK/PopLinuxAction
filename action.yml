@@ -2,7 +2,7 @@ name: 'Pop Linux build'
 inputs:
   architecture: 
     required: true
-  module:
+  project:
     required: true
 runs:
   using: 'node12'
