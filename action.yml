@@ -1,0 +1,9 @@
+name: 'Pop Linux build' 
+inputs:
+  architecture: 
+    required: true
+  module:
+    required: true
+runs:
+  using: 'node12'
+  main: 'index.js'
