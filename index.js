@@ -53,15 +53,15 @@ async function run() {
 
     // These can be parameters passed in at a later state
     const files = [
-      `Build/Linux_${architecture}/lib${project}.so`,
-      `Build/Linux_${architecture}/${project}TestApp`,
-      `Build/Linux_${architecture}/${project}.h`,
+      `build/Linux_${architecture}/lib${project}.so`,
+      `build/Linux_${architecture}/${project}TestApp`,
+      `build/Linux_${architecture}/${project}.h`,
     ];
 
     const rootDirectory = ".";
 
     const options = {
-      continueOnError: false,
+      continueOnError: true,
     };
     const uploadResponse = await artifactClient.uploadArtifact(
       artifactName,
