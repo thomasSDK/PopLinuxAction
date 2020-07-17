@@ -8,7 +8,7 @@ const architecture = core.getInput("architecture");
 const artifactClient = artifact.create();
 const artifactName = `linux-${architecture}`;
 // Get rid of 'NewChromantics/'
-const project = core.getInput("project").slice(14)
+const project = core.getInput("project")
 
 async function run() {
   try {
