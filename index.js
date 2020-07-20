@@ -11,8 +11,11 @@ async function run() {
   try {
     console.log(await exec.exec("ls"));
     process.env.archTarget = architecture;
+    console.log(machine)
 
     if(machine === 'pi*'){
+      console.log('wildcard worked'
+      )
       process.env.compiler = '/opt/gcc-10.1.0/bin/arm-linux-gnueabihf-g++-10.1';
     }
 
