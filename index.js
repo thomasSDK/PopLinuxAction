@@ -45,6 +45,10 @@ async function run() {
       ]);
     }
 
+    if(architecture === 'Pi4'){
+      process.env.compiler = 'g++-10.1';
+    }
+
     await exec.exec("make", [`exec`, `-C`, `${project}.Linux/`]);
 
   } catch (error) {
