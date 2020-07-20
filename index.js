@@ -2,6 +2,7 @@ const core = require("@actions/core");
 const github = require("@actions/github");
 const exec = require("@actions/exec");
 
+const machine = core.getInput("machine").toLowerCase();
 const architecture = core.getInput("architecture");
 
 const project = core.getInput("project")
@@ -10,6 +11,10 @@ async function run() {
   try {
     console.log(await exec.exec("ls"));
     process.env.archTarget = architecture;
+
+    if(machine === 'pi*'){
+      process.env.compiler = '/opt/gcc-10.1.0/bin/arm-linux-gnueabihf-g++-10.1';
+    }
 
     // For Gihub hosted runners need to update gcc and get libx264
     if (architecture === "x86_64") {
@@ -43,10 +48,6 @@ async function run() {
         `/usr/bin/g++-10`,
         `10`,
       ]);
-    }
-
-    if(architecture === 'Pi4'){
-      process.env.compiler = '/opt/gcc-10.1.0/bin/arm-linux-gnueabihf-g++-10.1';
     }
 
     await exec.exec("make", [`exec`, `-C`, `${project}.Linux/`]);

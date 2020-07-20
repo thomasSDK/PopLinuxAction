@@ -1,5 +1,7 @@
 name: 'Pop Linux build' 
 inputs:
+  machine:
+    required: true
   architecture: 
     required: true
   project:
