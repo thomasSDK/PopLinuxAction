@@ -46,7 +46,7 @@ async function run() {
     }
 
     if(architecture === 'Pi4'){
-      process.env.compiler = 'g++-10.1';
+      process.env.compiler = '/opt/gcc-10.1.0/bin/arm-linux-gnueabihf-g++-10.1';
     }
 
     await exec.exec("make", [`exec`, `-C`, `${project}.Linux/`]);
