@@ -13,7 +13,7 @@ async function run() {
     process.env.archTarget = architecture;
     console.log(machine)
 
-    if(machine === 'pi*'){
+    if(machine.substring(0,1) === 'pi'){
       console.log('wildcard worked'
       )
       process.env.compiler = '/opt/gcc-10.1.0/bin/arm-linux-gnueabihf-g++-10.1';
