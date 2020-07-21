@@ -2,7 +2,7 @@ const core = require("@actions/core");
 const github = require("@actions/github");
 const exec = require("@actions/exec");
 
-const machine = core.getInput("machine").toLowerCase();
+const machine = core.getInput("machine");
 const architecture = core.getInput("architecture");
 
 const project = core.getInput("project")
@@ -11,8 +11,9 @@ async function run() {
   try {
     console.log(await exec.exec("ls"));
     process.env.archTarget = architecture;
+    process.env.archTarget = machine;
 
-    if(machine.substring(0,2) === 'pi'){
+    if(machine.toLowerCase().substring(0,2) === 'pi'){
       process.env.compiler = '/opt/gcc-10.1.0/bin/arm-linux-gnueabihf-g++-10.1';
     }
 
@@ -51,6 +52,8 @@ async function run() {
     }
 
     await exec.exec("make", [`exec`, `-C`, `${project}.Linux/`]);
+
+    core.setOutput('buildDirectory', "Build");
 
   } catch (error) {
     core.setFailed(error.message);
