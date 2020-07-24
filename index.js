@@ -31,6 +31,7 @@ async function run() {
         `libx264-dev`,
         `gcc-10`,
         `g++-10`,
+        `webkitgtk-4.0-dev`,
         `-y`,
       ]);
       await exec.exec("sudo", [
