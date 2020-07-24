@@ -5,7 +5,7 @@ const exec = require("@actions/exec");
 const lib_dir = core.getInput("lib_dir");
 const architecture = core.getInput("architecture");
 
-const project = core.getInput("project")
+const project = core.getInput("project");
 
 async function run() {
   try {
@@ -13,11 +13,43 @@ async function run() {
     process.env.github_lib_dir = lib_dir;
     process.env.archTarget = architecture;
 
-    if(architecture.toLowerCase().substring(0,2) === 'pi'){
-      process.env.compiler = '/opt/gcc-10.1.0/bin/arm-linux-gnueabihf-g++-10.1';
+    // update compilier for pi and jetson
+    if (
+      architecture.toLowerCase().substring(0, 2) === "pi" ||
+      architecture.toLowerCase() === "nvidia"
+    ) {
+      await exec.exec(`sudo`, [
+        `apt-get`,
+        `install`,
+        `software-properties-common`,
+      ]);
+      await exec.exec(`sudo`, [`add-apt-repository`, `ppa:jonathonf/gcc-9.0`]);
+      await exec.exec(`sudo`, [`apt-get`, `install`, `gcc-9`, `g++-9`]);
+      await exec.exec(`sudo`, [
+        `update-alternatives`,
+        `--install`,
+        `/usr/bin/gcc`,
+        `gcc`,
+        `/usr/bin/gcc-9`,
+        `60`,
+        `--slave`,
+        `/usr/bin/g++`,
+        `g++`,
+        `/usr/bin/g++-9`,
+      ]);
+      // Get JavascriptCore
+      if (architecture.toLowerCase().substring(0, 2) === "pi") {
+        await exec.exec(`sudo`, [` apt-get`, `install`, `webkitgtk-4.0-dev`]);
+      } else if (architecture.toLowerCase() === "nvidia") {
+        await exec.exec(`sudo`, [
+          `apt-get`,
+          `install`,
+          `libjavascriptcoregtk-4.0-dev`,
+        ]);
+      }
     }
 
-    // For Gihub hosted runners need to update gcc and get libx264
+    // For Gihub hosted runners update gcc and get libs
     if (architecture === "x86_64") {
       await exec.exec("sudo", [
         `add-apt-repository`,
@@ -54,8 +86,7 @@ async function run() {
 
     await exec.exec("make", [`exec`, `-C`, `${project}.Linux/`]);
 
-    core.setOutput('buildDirectory', "Build");
-
+    core.setOutput("buildDirectory", "Build");
   } catch (error) {
     core.setFailed(error.message);
   }
