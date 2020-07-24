@@ -23,6 +23,7 @@ async function run() {
         `install`,
         `libx264-dev`,
         `software-properties-common`,
+        `-y`
       ]);
       await exec.exec(`sudo`, [`add-apt-repository`, `ppa:jonathonf/gcc-9.0`]);
       await exec.exec(`sudo`, [`apt-get`, `install`, `gcc-9`, `g++-9`]);
