@@ -1,7 +1,7 @@
 name: 'Pop Linux build' 
 inputs:
   lib_dir:
-    required: true
+    required: false
   os: 
     required: true
   project:
