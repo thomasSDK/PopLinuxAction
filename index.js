@@ -50,7 +50,7 @@ async function run() {
     }
 
     // For Gihub hosted runners update gcc and get libs
-    if (architecture === "x86_64") {
+    if (architecture === "ubuntu-latest") {
       await exec.exec("sudo", [
         `add-apt-repository`,
         `-y`,
