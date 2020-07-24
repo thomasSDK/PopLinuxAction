@@ -13,43 +13,44 @@ async function run() {
     process.env.github_lib_dir = lib_dir;
     process.env.osTarget = os;
 
+    // tsdk: need to set up a sudoer with no password to run these commands disabled for now
     // update compilier and libs for pi and jetson
-    if (
-      os.toLowerCase().substring(0, 2) === "pi" ||
-      os.toLowerCase() === "nvidia"
-    ) {
-      await exec.exec(`sudo`, [
-        `apt-get`,
-        `install`,
-        `libx264-dev`,
-        `software-properties-common`,
-        `-y`
-      ]);
-      await exec.exec(`sudo`, [`add-apt-repository`, `ppa:jonathonf/gcc-9.0`]);
-      await exec.exec(`sudo`, [`apt-get`, `install`, `gcc-9`, `g++-9`]);
-      await exec.exec(`sudo`, [
-        `update-alternatives`,
-        `--install`,
-        `/usr/bin/gcc`,
-        `gcc`,
-        `/usr/bin/gcc-9`,
-        `60`,
-        `--slave`,
-        `/usr/bin/g++`,
-        `g++`,
-        `/usr/bin/g++-9`,
-      ]);
-      // Get JavascriptCore
-      if (os.toLowerCase().substring(0, 2) === "pi") {
-        await exec.exec(`sudo`, [` apt-get`, `install`, `webkitgtk-4.0-dev`]);
-      } else if (os.toLowerCase() === "nvidia") {
-        await exec.exec(`sudo`, [
-          `apt-get`,
-          `install`,
-          `libjavascriptcoregtk-4.0-dev`,
-        ]);
-      }
-    }
+    // if (
+    //   os.toLowerCase().substring(0, 2) === "pi" ||
+    //   os.toLowerCase() === "nvidia"
+    // ) {
+    //   await exec.exec(`sudo`, [
+    //     `apt-get`,
+    //     `install`,
+    //     `libx264-dev`,
+    //     `software-properties-common`,
+    //     `-y`
+    //   ]);
+    //   await exec.exec(`sudo`, [`add-apt-repository`, `ppa:jonathonf/gcc-9.0`]);
+    //   await exec.exec(`sudo`, [`apt-get`, `install`, `gcc-9`, `g++-9`]);
+    //   await exec.exec(`sudo`, [
+    //     `update-alternatives`,
+    //     `--install`,
+    //     `/usr/bin/gcc`,
+    //     `gcc`,
+    //     `/usr/bin/gcc-9`,
+    //     `60`,
+    //     `--slave`,
+    //     `/usr/bin/g++`,
+    //     `g++`,
+    //     `/usr/bin/g++-9`,
+    //   ]);
+    //   // Get JavascriptCore
+    //   if (os.toLowerCase().substring(0, 2) === "pi") {
+    //     await exec.exec(`sudo`, [` apt-get`, `install`, `webkitgtk-4.0-dev`]);
+    //   } else if (os.toLowerCase() === "nvidia") {
+    //     await exec.exec(`sudo`, [
+    //       `apt-get`,
+    //       `install`,
+    //       `libjavascriptcoregtk-4.0-dev`,
+    //     ]);
+    //   }
+    // }
 
     // For Gihub hosted runners update gcc and get libs
     if (os === "ubuntu-latest") {
