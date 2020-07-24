@@ -3,7 +3,7 @@ const github = require("@actions/github");
 const exec = require("@actions/exec");
 
 const lib_dir = core.getInput("lib_dir");
-const architecture = core.getInput("architecture");
+const os = core.getInput("os");
 
 const project = core.getInput("project");
 
@@ -11,12 +11,12 @@ async function run() {
   try {
     console.log(await exec.exec("ls"));
     process.env.github_lib_dir = lib_dir;
-    process.env.archTarget = architecture;
+    process.env.osTarget = os;
 
     // update compilier for pi and jetson
     if (
-      architecture.toLowerCase().substring(0, 2) === "pi" ||
-      architecture.toLowerCase() === "nvidia"
+      os.toLowerCase().substring(0, 2) === "pi" ||
+      os.toLowerCase() === "nvidia"
     ) {
       await exec.exec(`sudo`, [
         `apt-get`,
@@ -38,9 +38,9 @@ async function run() {
         `/usr/bin/g++-9`,
       ]);
       // Get JavascriptCore
-      if (architecture.toLowerCase().substring(0, 2) === "pi") {
+      if (os.toLowerCase().substring(0, 2) === "pi") {
         await exec.exec(`sudo`, [` apt-get`, `install`, `webkitgtk-4.0-dev`]);
-      } else if (architecture.toLowerCase() === "nvidia") {
+      } else if (os.toLowerCase() === "nvidia") {
         await exec.exec(`sudo`, [
           `apt-get`,
           `install`,
