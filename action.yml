@@ -1,6 +1,6 @@
 name: 'Pop Linux build' 
 inputs:
-  machine:
+  lib_dir:
     required: true
   architecture: 
     required: true

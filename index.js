@@ -2,7 +2,7 @@ const core = require("@actions/core");
 const github = require("@actions/github");
 const exec = require("@actions/exec");
 
-const machine = core.getInput("machine");
+const lib_dir = core.getInput("lib_dir");
 const architecture = core.getInput("architecture");
 
 const project = core.getInput("project")
@@ -10,10 +10,10 @@ const project = core.getInput("project")
 async function run() {
   try {
     console.log(await exec.exec("ls"));
+    process.env.github_lib_dir = lib_dir;
     process.env.archTarget = architecture;
-    process.env.archTarget = machine;
 
-    if(machine.toLowerCase().substring(0,2) === 'pi'){
+    if(architecture.toLowerCase().substring(0,2) === 'pi'){
       process.env.compiler = '/opt/gcc-10.1.0/bin/arm-linux-gnueabihf-g++-10.1';
     }
 
