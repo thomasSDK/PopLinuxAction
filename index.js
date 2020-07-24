@@ -13,7 +13,7 @@ async function run() {
     process.env.github_lib_dir = lib_dir;
     process.env.osTarget = os;
 
-    // update compilier for pi and jetson
+    // update compilier and libs for pi and jetson
     if (
       os.toLowerCase().substring(0, 2) === "pi" ||
       os.toLowerCase() === "nvidia"
@@ -21,6 +21,7 @@ async function run() {
       await exec.exec(`sudo`, [
         `apt-get`,
         `install`,
+        `libx264-dev`,
         `software-properties-common`,
       ]);
       await exec.exec(`sudo`, [`add-apt-repository`, `ppa:jonathonf/gcc-9.0`]);
