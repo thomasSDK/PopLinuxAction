@@ -64,6 +64,7 @@ async function run() {
         `apt-get`,
         `install`,
         `libx264-dev`,
+        `libgdiplus`,
         `gcc-10`,
         `g++-10`,
         `libjavascriptcoregtk-4.0-dev`,
