@@ -88,7 +88,7 @@ async function run() {
 
     await exec.exec("make", [`exec`, `-C`, `${project}.Linux/`]);
 
-    core.setOutput("buildDirectory", "Build");
+    core.exportVariable('UPLOAD_DIR', 'Build');
   } catch (error) {
     core.setFailed(error.message);
   }
