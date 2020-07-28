@@ -16,7 +16,7 @@ async function run() {
     // tsdk: set the correct compilier for the pi https://solarianprogrammer.com/2017/12/08/raspberry-pi-raspbian-install-gcc-compile-cpp-17-programs/
     // can this be set of the runner directly?
     if (os.toLowerCase().substring(0, 2) === "pi") {
-      process.env.compiler = "g++-10.1"
+      process.env.compiler = "/opt/gcc-10.1.0/bin/g++-10.1"
     }
 
     // tsdk: need to set up a sudoer with no password to run these commands disabled for now
