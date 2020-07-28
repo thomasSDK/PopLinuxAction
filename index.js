@@ -67,7 +67,6 @@ async function run() {
         `gcc-10`,
         `g++-10`,
         `libjavascriptcoregtk-4.0-dev`,
-        `libc6-dev`,
       ]);
       await exec.exec("sudo", [
         `update-alternatives`,
