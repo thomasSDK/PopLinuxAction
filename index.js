@@ -13,6 +13,12 @@ async function run() {
     process.env.github_lib_dir = lib_dir;
     process.env.osTarget = os;
 
+    // tsdk: set the correct compilier for the pi https://solarianprogrammer.com/2017/12/08/raspberry-pi-raspbian-install-gcc-compile-cpp-17-programs/
+    // can this be set of the runner directly?
+    if (os.toLowerCase().substring(0, 2) === "pi") {
+      process.env.compiler = "g++-10.1"
+    }
+
     // tsdk: need to set up a sudoer with no password to run these commands disabled for now
     // update compilier and libs for pi and jetson
     // if (
@@ -88,6 +94,7 @@ async function run() {
 
     await exec.exec("make", [`exec`, `-C`, `${project}.Linux/`]);
 
+    core.exportVariable('UPLOAD_NAME', os);
     core.exportVariable('UPLOAD_DIR', 'Build');
   } catch (error) {
     core.setFailed(error.message);
