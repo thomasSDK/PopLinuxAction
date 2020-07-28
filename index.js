@@ -64,11 +64,10 @@ async function run() {
         `apt-get`,
         `install`,
         `libx264-dev`,
-        `libgdiplus`,
         `gcc-10`,
         `g++-10`,
         `libjavascriptcoregtk-4.0-dev`,
-        `-y`,
+        `libc6-dev`,
       ]);
       await exec.exec("sudo", [
         `update-alternatives`,
