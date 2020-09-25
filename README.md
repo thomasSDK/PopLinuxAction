@@ -7,4 +7,8 @@ https://solarianprogrammer.com/2017/12/08/raspberry-pi-raspbian-install-gcc-comp
 
 _Needed Libs_
 
-Make sure to install libgles2-mesa-dev
+Make sure to apt install:
+
+- libgles2-mesa-dev
+- kmscube
+    
