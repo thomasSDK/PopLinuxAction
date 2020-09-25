@@ -73,6 +73,7 @@ async function run() {
         `gcc-10`,
         `g++-10`,
         `libjavascriptcoregtk-4.0-dev`,
+        `libgles2-mesa-dev `,
       ]);
       await exec.exec("sudo", [
         `update-alternatives`,
