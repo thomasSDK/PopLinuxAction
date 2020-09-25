@@ -4,3 +4,7 @@ The architecture for nvidia is stated in reference to an if statement in the Lin
 
 The compilier on the pi's needs to be updated to a later version 
 https://solarianprogrammer.com/2017/12/08/raspberry-pi-raspbian-install-gcc-compile-cpp-17-programs/
+
+_Needed Libs_
+
+Make sure to install libgles2-mesa-dev
