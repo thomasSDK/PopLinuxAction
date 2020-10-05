@@ -10,5 +10,6 @@ _Needed Libs_
 Make sure to apt install:
 
 - libgles2-mesa-dev
+- libgbm-dev
 - kmscube
     
