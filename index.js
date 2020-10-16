@@ -76,6 +76,7 @@ async function run() {
         `libgles2-mesa-dev`,
         `libgbm-dev`,
         `udev`,
+        `libudev-dev`,
       ]);
       await exec.exec("sudo", [
         `update-alternatives`,
