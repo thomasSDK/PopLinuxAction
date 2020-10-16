@@ -75,6 +75,7 @@ async function run() {
         `libjavascriptcoregtk-4.0-dev`,
         `libgles2-mesa-dev`,
         `libgbm-dev`,
+        `udev`,
       ]);
       await exec.exec("sudo", [
         `update-alternatives`,
