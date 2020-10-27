@@ -58,6 +58,9 @@ async function run() {
         `10`,
       ]);
     }
+    
+    if(flag === 'osmesa')
+      await exec.exec("wget", ["-O", "src/Libs/osmesa", "https://github.com/NewChromantics/OsMesaBuilder/releases/download/mesa-20.2.1/osmesa.zip"])
 
     await exec.exec("make", [`exec`, `-C`, `${project}.Linux/`]);
 
