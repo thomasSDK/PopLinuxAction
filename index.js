@@ -64,7 +64,7 @@ async function run() {
 
     await exec.exec("make", [`exec`, `-C`, `${project}.Linux/`]);
 
-    core.exportVariable('UPLOAD_NAME', os);
+    core.exportVariable('UPLOAD_NAME', os + flag);
     core.exportVariable('UPLOAD_DIR', 'Build');
   } catch (error) {
     core.setFailed(error.message);
