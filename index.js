@@ -4,6 +4,7 @@ const exec = require("@actions/exec");
 
 const lib_dir = core.getInput("lib_dir");
 const os = core.getInput("os");
+const flag = core.getInput("flag");
 
 const project = core.getInput("project");
 
@@ -12,6 +13,7 @@ async function run() {
     console.log(await exec.exec("ls"));
     process.env.github_lib_dir = lib_dir;
     process.env.osTarget = os;
+    process.env.flag = flag;
 
     // tsdk: set the correct compilier for the pi https://solarianprogrammer.com/2017/12/08/raspberry-pi-raspbian-install-gcc-compile-cpp-17-programs/
     // can this be set of the runner directly?
