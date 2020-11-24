@@ -16,7 +16,7 @@ RUN apt update -qq && \
         libjavascriptcoregtk-4.0-dev \
         libgles2-mesa-dev \
         libgbm-dev \
-        udev \
+        udev  \
         libudev-dev
 
 RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 10 && \
