@@ -9,6 +9,8 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN apt update -qq && \
     apt install -qq -y software-properties-common && \
     add-apt-repository -y ppa:ubuntu-toolchain-r/test && \
+    apt update -qq && \
+    apt upgrade -qq -y && \
     apt install -qq -y \
         libx264-dev \
         gcc-10 \
