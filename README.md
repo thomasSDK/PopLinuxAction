@@ -7,9 +7,4 @@ https://solarianprogrammer.com/2017/12/08/raspberry-pi-raspbian-install-gcc-comp
 
 _Needed Libs_
 
-Make sure to apt install:
-
-- libgles2-mesa-dev
-- libgbm-dev
-- kmscube
-    
+A list of the libs can be found in the Dockerfile which can be used as a build environment for the packages
