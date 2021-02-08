@@ -40,6 +40,7 @@ async function InstallDependencies() {
       `texinfo`,
       `bison`,
       `libncurses-dev`,
+      `realpath`
     ])
 
     await exec.exec("wget", [
