@@ -30,7 +30,7 @@ async function InstallDependencies() {
 
   if(flag === pi)
   {
-    await exec.exec("sudo" [
+    await exec.exec("sudo", [
       `apt-get`,
       `build-essential`,
       `gawk`,
@@ -52,7 +52,7 @@ async function InstallDependencies() {
     await exec.exec("PATH=./cross-pi-gcc-10.2.0-2/bin:$PATH")
     await exec.exec("LD_LIBRARY_PATH=./cross-pi-gcc-10.2.0-2/lib:$LD_LIBRARY_PATH")
 
-    process.env.compiler = await exec.exec("realpath" ["cross-pi-gcc-10.2.0-2"])
+    process.env.compiler = await exec.exec("realpath", ["cross-pi-gcc-10.2.0-2"])
   }
   else
   {
