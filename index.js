@@ -28,7 +28,7 @@ async function InstallDependencies() {
     `libudev-dev`,
   ]);
 
-  if(flag === pi)
+  if(flag === "pi")
   {
     await exec.exec("sudo", [
       `apt-get`,
