@@ -8,6 +8,73 @@ const flag = core.getInput("flag");
 
 const project = core.getInput("project");
 
+async function InstallDependencies() {
+  await exec.exec("sudo", [
+    `add-apt-repository`,
+    `-y`,
+    `ppa:ubuntu-toolchain-r/test`,
+  ]);
+  await exec.exec("sudo", [`apt-get`, `update`]);
+  await exec.exec("sudo", [
+    `apt-get`,
+    `install`,
+    `libx264-dev`,
+    `gcc-10`,
+    `g++-10`,
+    `libjavascriptcoregtk-4.0-dev`,
+    `libgles2-mesa-dev`,
+    `libgbm-dev`,
+    `udev`,
+    `libudev-dev`,
+  ]);
+
+  if(flag === pi)
+  {
+    await exec.exec("sudo" [
+      `apt-get`,
+      `build-essential`,
+      `gawk`,
+      `gfortran`,
+      `git`,
+      `texinfo`,
+      `bison`,
+      `libncurses-dev`,
+    ])
+
+    await exec.exec("wget", [
+      "-O",
+      "Compiler",
+      "https://sourceforge.net/projects/raspberry-pi-cross-compilers/files/Raspberry%20Pi%20GCC%20Cross-Compiler%20Toolchains/Buster/GCC%2010.2.0/Raspberry%20Pi%203A%2B%2C%203B%2B%2C%204/cross-gcc-10.2.0-pi_3%2B.tar.gz/download"
+    ])
+
+    await exec.exec("tar", ["xf", "Compiler"])
+
+    await exec.exec("PATH=./cross-pi-gcc-10.2.0-2/bin:$PATH")
+    await exec.exec("LD_LIBRARY_PATH=./cross-pi-gcc-10.2.0-2/lib:$LD_LIBRARY_PATH")
+
+    process.env.compiler = await exec.exec("realpath" ["cross-pi-gcc-10.2.0-2"])
+  }
+  else
+  {
+    await exec.exec("sudo", [
+      `update-alternatives`,
+      `--install`,
+      `/usr/bin/gcc`,
+      `gcc`,
+      `/usr/bin/gcc-10`,
+      `10`,
+    ]);
+    await exec.exec("sudo", [
+      `update-alternatives`,
+      `--install`,
+      `/usr/bin/g++`,
+      `g++`,
+      `/usr/bin/g++-10`,
+      `10`,
+    ]);
+  }
+}
+
 async function run() {
   try {
     console.log(await exec.exec("ls"));
@@ -23,40 +90,7 @@ async function run() {
 
     // For Gihub hosted runners update gcc and get libs
     if (os === "ubuntu-latest") {
-      await exec.exec("sudo", [
-        `add-apt-repository`,
-        `-y`,
-        `ppa:ubuntu-toolchain-r/test`,
-      ]);
-      await exec.exec("sudo", [`apt-get`, `update`]);
-      await exec.exec("sudo", [
-        `apt-get`,
-        `install`,
-        `libx264-dev`,
-        `gcc-10`,
-        `g++-10`,
-        `libjavascriptcoregtk-4.0-dev`,
-        `libgles2-mesa-dev`,
-        `libgbm-dev`,
-        `udev`,
-        `libudev-dev`,
-      ]);
-      await exec.exec("sudo", [
-        `update-alternatives`,
-        `--install`,
-        `/usr/bin/gcc`,
-        `gcc`,
-        `/usr/bin/gcc-10`,
-        `10`,
-      ]);
-      await exec.exec("sudo", [
-        `update-alternatives`,
-        `--install`,
-        `/usr/bin/g++`,
-        `g++`,
-        `/usr/bin/g++-10`,
-        `10`,
-      ]);
+      await InstallDependencies();
     }
     
     if(flag === 'osmesa')
