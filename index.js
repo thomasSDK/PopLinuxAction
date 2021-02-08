@@ -50,12 +50,12 @@ async function InstallDependencies() {
 
     await exec.exec("tar", ["xf", "Compiler"])
 
-    core.exportVariable("PATH", '"./cross-pi-gcc-10.2.0-2/bin:$PATH"');
-    core.exportVariable("LD_LIBRARY_PATH", '"./cross-pi-gcc-10.2.0-2/lib:$LD_LIBRARY_PATH"');
-
-    await exec.exec("env");
+    core.addPath('./cross-pi-gcc-10.2.0-2/lib:$LD_LIBRARY_PATH');
+    // core.exportVariable("LD_LIBRARY_PATH", '"./cross-pi-gcc-10.2.0-2/lib:$LD_LIBRARY_PATH"');
 
     process.env.compiler = "./cross-pi-gcc-10.2.0-2"
+
+    console.log(await exec.exec("env"));
   }
   else
   {
