@@ -39,8 +39,7 @@ async function InstallDependencies() {
       `git`,
       `texinfo`,
       `bison`,
-      `libncurses-dev`,
-      `realpath`
+      `libncurses-dev`
     ])
 
     await exec.exec("wget", [
@@ -54,7 +53,7 @@ async function InstallDependencies() {
     core.exportVariable("PATH", "./cross-pi-gcc-10.2.0-2/bin:$PATH");
     core.exportVariable("LD_LIBRARY_PATH", "./cross-pi-gcc-10.2.0-2/lib:$LD_LIBRARY_PATH");
 
-    process.env.compiler = await exec.exec("realpath", ["cross-pi-gcc-10.2.0-2"])
+    process.env.compiler = "./cross-pi-gcc-10.2.0-2"
   }
   else
   {
