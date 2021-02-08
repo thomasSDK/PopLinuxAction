@@ -53,6 +53,8 @@ async function InstallDependencies() {
     core.exportVariable("PATH", "./cross-pi-gcc-10.2.0-2/bin:$PATH");
     core.exportVariable("LD_LIBRARY_PATH", "./cross-pi-gcc-10.2.0-2/lib:$LD_LIBRARY_PATH");
 
+    await exec.exec("env");
+
     process.env.compiler = "./cross-pi-gcc-10.2.0-2"
   }
   else
