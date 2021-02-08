@@ -1,6 +1,7 @@
 const core = require("@actions/core");
 const github = require("@actions/github");
 const exec = require("@actions/exec");
+const path = require('path');
 
 const lib_dir = core.getInput("lib_dir");
 const os = core.getInput("os");
@@ -50,10 +51,10 @@ async function InstallDependencies() {
 
     await exec.exec("tar", ["xf", "Compiler"])
 
-    core.addPath('./cross-pi-gcc-10.2.0-2/lib:$LD_LIBRARY_PATH');
-    // core.exportVariable("LD_LIBRARY_PATH", '"./cross-pi-gcc-10.2.0-2/lib:$LD_LIBRARY_PATH"');
+    core.addPath(path.resolve("cross-pi-gcc-10.2.0-2/bin"));
+    core.exportVariable("LD_LIBRARY_PATH", core.resolve("cross-pi-gcc-10.2.0-2/lib"));
 
-    process.env.compiler = "./cross-pi-gcc-10.2.0-2"
+    process.env.compiler = path.resolve("cross-pi-gcc-10.2.0-2");
 
     console.log(await exec.exec("env"));
   }
