@@ -52,7 +52,7 @@ async function InstallDependencies() {
     await exec.exec("tar", ["xf", "Compiler"])
 
     core.addPath(path.resolve("cross-pi-gcc-10.2.0-2/bin"));
-    core.exportVariable("LD_LIBRARY_PATH", core.resolve("cross-pi-gcc-10.2.0-2/lib"));
+    core.exportVariable("LD_LIBRARY_PATH", path.resolve("cross-pi-gcc-10.2.0-2/lib"));
 
     process.env.compiler = path.resolve("cross-pi-gcc-10.2.0-2");
 
