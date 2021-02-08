@@ -50,8 +50,8 @@ async function InstallDependencies() {
 
     await exec.exec("tar", ["xf", "Compiler"])
 
-    await exec.exec("PATH=./cross-pi-gcc-10.2.0-2/bin:$PATH")
-    await exec.exec("LD_LIBRARY_PATH=./cross-pi-gcc-10.2.0-2/lib:$LD_LIBRARY_PATH")
+    await exec.exec("export", ["PATH=./cross-pi-gcc-10.2.0-2/bin:$PATH"])
+    await exec.exec("export", ["LD_LIBRARY_PATH=./cross-pi-gcc-10.2.0-2/lib:$LD_LIBRARY_PATH"])
 
     process.env.compiler = await exec.exec("realpath", ["cross-pi-gcc-10.2.0-2"])
   }
