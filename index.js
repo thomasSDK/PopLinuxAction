@@ -32,6 +32,7 @@ async function InstallDependencies() {
   {
     await exec.exec("sudo", [
       `apt-get`,
+      `install`,
       `build-essential`,
       `gawk`,
       `gfortran`,
