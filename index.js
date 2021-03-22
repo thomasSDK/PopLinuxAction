@@ -22,7 +22,7 @@ async function run() {
     }
 
     // For Gihub hosted runners update gcc and get libs
-    if (os === "ubuntu-latest") {
+    if (os.startsWith("ubuntu")) {
       await exec.exec("sudo", [
         `add-apt-repository`,
         `-y`,
