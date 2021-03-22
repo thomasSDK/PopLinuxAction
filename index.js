@@ -3,7 +3,8 @@ const github = require("@actions/github");
 const exec = require("@actions/exec");
 
 const lib_dir = core.getInput("lib_dir");
-const os = core.getInput("os");
+let os = core.getInput("os");
+const arch = core.getInput("arch");
 const flag = core.getInput("flag");
 
 const project = core.getInput("project");
@@ -23,6 +24,7 @@ async function run() {
 
     // For Gihub hosted runners update gcc and get libs
     if (os.startsWith("ubuntu")) {
+      os = "Ubuntu";
       await exec.exec("sudo", [
         `add-apt-repository`,
         `-y`,
@@ -67,7 +69,11 @@ async function run() {
 
     await exec.exec("make", [`exec`, `-C`, `${project}.Linux/`]);
 
-    core.exportVariable('UPLOAD_NAME', os + flag);
+    let UploadName = `${os}_${arch}`;
+    if(flag)
+      UploadName += `_${flag}`;
+
+    core.exportVariable('UPLOAD_NAME', UploadName);
     core.exportVariable('UPLOAD_DIR', 'Build');
   } catch (error) {
     core.setFailed(error.message);
