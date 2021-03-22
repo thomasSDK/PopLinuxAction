@@ -13,7 +13,6 @@ async function run() {
   try {
     console.log(await exec.exec("ls"));
     process.env.github_lib_dir = lib_dir;
-    process.env.osTarget = os;
     process.env.flag = flag;
 
     // tsdk: set the correct compilier for the pi https://solarianprogrammer.com/2017/12/08/raspberry-pi-raspbian-install-gcc-compile-cpp-17-programs/
@@ -66,6 +65,9 @@ async function run() {
       await exec.exec("wget", ["https://github.com/NewChromantics/OsMesaBuilder/releases/download/mesa-20.2.1/osmesa.zip"])
       await exec.exec("unzip", ["osmesa.zip", "-d", "src/Libs/osmesa"])
     }
+
+    //tsdk: Setting this down here to catch when we strip the version number from the ubuntu runner
+    process.env.osTarget = `${os}_${arch}`;
 
     await exec.exec("make", [`exec`, `-C`, `${project}.Linux/`]);
 
